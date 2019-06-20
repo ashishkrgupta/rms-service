@@ -29,7 +29,7 @@ def getInvoices():
 def getInvoice(invId):
     print(invId)
     inv = [ inv for inv in invDb if (inv['id'] == invId) ]
-    return jsonify(inv)
+    return jsonify(inv[0])
 
 @invoice_api.route("/invoices", methods=['POST'])
 def createInvoice():
