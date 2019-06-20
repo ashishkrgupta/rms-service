@@ -23,13 +23,13 @@ invDb = [
 
 @invoice_api.route("/invoices", methods=['GET'])
 def getInvoices():
-    return jsonify({'invoices':invDb})
+    return jsonify(invDb)
 
 @invoice_api.route("/invoices/<invId>", methods=['GET'])
 def getInvoice(invId):
     print(invId)
     inv = [ inv for inv in invDb if (inv['id'] == invId) ]
-    return jsonify({'invoice':inv})
+    return jsonify(inv)
 
 @invoice_api.route("/invoices", methods=['POST'])
 def createInvoice():
