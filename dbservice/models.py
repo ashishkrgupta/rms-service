@@ -1,8 +1,10 @@
-from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, ARRAY
+from sqlalchemy import *
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from dbservice import engine
 
+metadata = MetaData()
+metadata.bind = engine
 Base = declarative_base()
 
 class Invoice(Base):
@@ -14,4 +16,4 @@ class Invoice(Base):
     invoiceDate = Column(String)
     items = Column(ARRAY(String))
 
-Base.metadata.create_all()
+metadata.create_all()

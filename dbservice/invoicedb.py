@@ -2,13 +2,20 @@ from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, create_engi
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import sys
-sys.path.append("..")
+from dbservice import engine
 from models import Invoice
 
-engine = create_engine("sqlite:///rms-service.db", echo = True)
 
-session = sessionmaker(bind=engine)
+Session = sessionmaker(bind = engine)
+session = Session()
+
+inv = Invoice()
+inv.customerName = "Ashish"
+inv.id = 1
+inv.contactNo = 7208769992
+
+session.add(inv)
+session.commit()
 
 invoices = session.query(Invoice).all()
 print(invoices)
