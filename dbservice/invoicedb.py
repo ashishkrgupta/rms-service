@@ -1,14 +1,16 @@
-from sqlalchemy import Column, String, Integer, Numeric, ForeignKey
+from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+import sys
+sys.path.append("..")
+from models import Invoice
 
-Base = declarative_base()
+engine = create_engine("sqlite:///rms-service.db", echo = True)
 
-class Invoice(Base)
-    __table__ = 'invoice'
-    id = Column(Integer, primary_key = True)
-    customerName = Column(String)
-    contactNo = Column(String)
-    total = Column(Numeric)
-    invoiceDate = Column(String)
-    items = Column(Array(String))
+session = sessionmaker(bind=engine)
+
+invoices = session.query(Invoice).all()
+print(invoices)
+
+session = Session()
