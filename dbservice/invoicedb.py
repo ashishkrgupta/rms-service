@@ -13,11 +13,13 @@ inv = Invoice()
 inv.customerName = "Ashish"
 inv.id = 1
 inv.contactNo = 7208769992
+inv.total = 11.89
 
-session.add(inv)
-session.commit()
+#session.add(inv)
+#session.commit()
 
 invoices = session.query(Invoice).all()
-print(invoices)
+for inv in invoices:
+    print(inv.customerName)
 
 session = Session()

@@ -3,9 +3,9 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from dbservice import engine
 
-metadata = MetaData()
-metadata.bind = engine
 Base = declarative_base()
+metadata = MetaData()
+Base.metadata.bind = engine
 
 class Invoice(Base):
     __tablename__ = 'invoice'
@@ -14,6 +14,6 @@ class Invoice(Base):
     contactNo = Column(String)
     total = Column(Numeric)
     invoiceDate = Column(String)
-    items = Column(ARRAY(String))
+    #items = Column(ARRAY(String))
 
-metadata.create_all()
+Base.metadata.create_all()
