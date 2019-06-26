@@ -1,7 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
-from dbservice import engine
+from .dbservice import engine
 
 Base = declarative_base()
 metadata = MetaData()

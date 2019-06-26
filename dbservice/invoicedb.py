@@ -2,24 +2,23 @@ from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, create_engi
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from dbservice import engine
-from models import Invoice
-
+from .dbservice import engine
+from .models import Invoice
 
 Session = sessionmaker(bind = engine)
-session = Session()
 
-inv = Invoice()
-inv.customerName = "Ashish"
-inv.id = 1
-inv.contactNo = 7208769992
-inv.total = 11.89
+def addInvoice(invoice):
+    session = Session()
+    session.add(invoice)
+    session.commit()
 
-#session.add(inv)
-#session.commit()
+def getInvoices():
+    session = Session()
+    invoices = session.query(Invoice).all()
+    return invoices
 
-invoices = session.query(Invoice).all()
-for inv in invoices:
-    print(inv.customerName)
-
-session = Session()
+def getInvoice(invoiceId):
+    session = Session()
+    invoices = session.query(Invoice).all()
+    return invoices
+    
